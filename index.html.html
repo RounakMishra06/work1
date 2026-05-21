@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#171e00",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "error": "#ffb4ab",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "tertiary": "#ffffff",
+                    "tertiary-fixed": "#e5e2e1",
+                    "primary-fixed-dim": "#b0d500",
+                    "on-surface": "#e2e2e2",
+                    "surface-container-low": "#1a1c1c",
+                    "inverse-surface": "#e2e2e2",
+                    "surface-bright": "#38393a",
+                    "secondary-fixed": "#e5e2e1",
+                    "secondary-fixed-dim": "#c9c6c5",
+                    "secondary-container": "#4a4949",
+                    "on-secondary-fixed-variant": "#474646",
+                    "inverse-on-surface": "#2f3131",
+                    "surface-tint": "#b0d500",
+                    "surface-dim": "#121414",
+                    "surface-variant": "#333535",
+                    "inverse-primary": "#536600",
+                    "background": "#121414",
+                    "on-primary-fixed-variant": "#3e4c00",
+                    "tertiary-container": "#e5e2e1",
+                    "surface": "#121414",
+                    "primary": "#ffffff",
+                    "surface-container": "#1e2020",
+                    "on-background": "#e2e2e2",
+                    "on-secondary": "#313030",
+                    "on-primary-container": "#596c00",
+                    "on-primary": "#2a3400",
+                    "on-surface-variant": "#c5c9ac",
+                    "outline-variant": "#444932",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#333535",
+                    "on-tertiary": "#313030",
+                    "error-container": "#93000a",
+                    "primary-fixed": "#caf300",
+                    "on-error": "#690005",
+                    "surface-container-lowest": "#0c0f0f",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "primary-container": "#caf300",
+                    "secondary": "#c9c6c5",
+                    "on-tertiary-container": "#656464",
+                    "on-secondary-container": "#bab8b7",
+                    "surface-container-high": "#282a2b",
+                    "outline": "#8f9378"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "base": "8px",
+                    "lg": "48px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "gutter": "24px",
+                    "margin": "40px",
+                    "xl": "80px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Space Grotesk"],
+                    "label-sm": ["Space Grotesk"],
+                    "body-md": ["Inter"],
+                    "display-xl": ["Space Grotesk"],
+                    "headline-lg": ["Space Grotesk"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-xl": ["80px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "headline-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .glow-border {
+            border: 1px solid rgba(212, 255, 0, 0.2);
+        }
+        .glow-border:hover {
+            border: 1px solid #D4FF00;
+        }
+        .text-neon {
+            color: #D4FF00;
+        }
+        .bg-neon {
+            background-color: #D4FF00;
+        }
+        
+        /* Slider Styles */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            background: transparent;
+        }
+        
+        .slide-track {
+            display: flex;
+            gap: 1.5rem;
+            animation: scroll-left 40s linear infinite;
+            width: max-content;
+        }
+        
+        .slider-container:hover .slide-track {
+            animation-play-state: paused;
+        }
+        
+        .slide {
+            flex: 0 0 400px;
+            min-width: 400px;
+        }
+        
+        @keyframes scroll-left {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide {
+                flex: 0 0 280px;
+                min-width: 280px;
+            }
+            
+            .slide-track {
+                animation-duration: 30s;
+                gap: 1rem;
+            }
+        }
+        
+        /* Testimonial Slider Styles */
+        .testimonial-slider {
+            width: 100%;
+            overflow: hidden;
+            background: transparent;
+        }
+        
+        .testimonial-track {
+            display: flex;
+            gap: 1.5rem;
+            animation: scroll-left 35s linear infinite;
+            width: max-content;
+        }
+        
+        .testimonial-slider:hover .testimonial-track {
+            animation-play-state: paused;
+        }
+        
+        .testimonial-slide {
+            flex: 0 0 450px;
+            min-width: 450px;
+        }
+        
+        @media (max-width: 768px) {
+            .testimonial-slide {
+                flex: 0 0 320px;
+                min-width: 320px;
+            }
+            
+            .testimonial-track {
+                animation-duration: 28s;
+                gap: 1rem;
+            }
+        }
+        
+        /* Navbar Active State Styles */
+        .nav-link {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #a1a1a1;
+            transition: color 0.2s duration-200;
+            padding: 0 0.5rem;
+        }
+        
+        .nav-link:hover {
+            color: #D4FF00;
+        }
+        
+        .nav-link.active {
+            color: #D4FF00;
+            border-bottom: 2px solid #D4FF00;
+            padding-bottom: 0.25rem;
+        }
+        
+        /* Footer Styles */
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            font-family: Space Grotesk;
+        }
+        
+        .footer-copyright {
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #666;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            font-size: 0.625rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: #D4FF00;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-container {
+                justify-content: space-between;
+                gap: 1.5rem;
+            }
+            
+            .footer-right {
+                width: 100%;
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-zinc-950/90 backdrop-blur-xl dark:bg-black/90 border-b border-zinc-800 dark:border-zinc-900">
+<div class="flex justify-between items-center h-20 px-6 md:px-12 w-full mx-auto">
+    <img
+        src="./images/10L.png"
+        alt="Motion Flicks"
+        class="h-11 md:h-14 w-auto object-contain transition-all duration-300 hover:scale-105"
+    />
+<div class="hidden md:flex gap-base">
+<a class="nav-link font-label-sm" href="#services">SERVICES</a>
+<a class="nav-link font-label-sm" href="#work">OUR WORK</a>
+<a class="nav-link font-label-sm" href="#why">WHY US?</a>
+</div>
+<a href="https://calendly.com/anandsingh-6337/30min?back=1&month=2026-04" target="_blank" class="bg-neon text-on-primary-fixed font-label-sm px-md py-sm active:scale-95 duration-150 ease-in-out inline-block cursor-pointer hover:scale-105 transition-transform">
+                BOOK A CALL
+            </a>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<div class="absolute inset-0 bg-gradient-to-b from-black/20 via-background to-background z-10"></div>
+<img class="w-full h-full object-cover opacity-30 grayscale" data-alt="Cinematic high-tech setup with neon green lighting, multiple monitors showing video editing timelines, atmospheric smoke and sharp lens flares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvtzfHFTqrKo9XtqBU8rTUs1x69fdeTeVRGfnOCs1t9oS7DQJHd14LZpQ69veUmArCdfhdAkJ78j5RufHaML5cU-teS2wW9mLm97t1_Wh_PEDW6EEdZ0FtdVPRBaWuWkfM_CueKzSA-Ly7YCT2gF8kH-4MHL58_p3PJsMszGHVGq3VFrxGU_52c1Gb2qFRCx1DM2Y02-qRZfdEDM6MYz0y6R2JzYmvFb1zW-Or4G6k1CA4LFd6zHCUipEZaLjRyltrMzqwcMpGbRuR"/>
+</div>
+<div class="relative z-20 text-center max-w-5xl mx-auto space-y-lg">
+<span class="inline-block border border-neon/30 bg-neon/5 px-base py-xs text-neon font-label-sm tracking-widest mb-md">
+                HIGH-PERFORMANCE YOUTUBE SCALE
+            </span>
+<h1 class="font-display-xl text-display-xl uppercase text-white leading-tight">
+                We Scale &amp; <span class="text-neon">Monetize</span> Brands Using YouTube
+            </h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl mx-auto">
+                From zero to high-performing content systems. We engineer cinematic narratives that drive revenue and build authority.
+            </p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-md pt-md">
+<a href="https://calendly.com/anandsingh-6337/30min?back=1&month=2026-04" target="_blank" class="w-full md:w-auto bg-neon text-on-primary-fixed font-label-sm px-xl py-md text-lg active:scale-95 duration-150 inline-block text-center cursor-pointer hover:scale-105 transition-transform">
+                    BOOK A FREE STRATEGY CALL
+                </a>
+<button class="w-full md:w-auto border border-white/20 text-white font-label-sm px-xl py-md text-lg hover:border-white transition-colors duration-200">
+                    VIEW CASE STUDIES
+                </button>
+</div>
+</div>
+</section>
+<!-- Social Proof / Metrics -->
+<section class="bg-surface-container-lowest border-y border-zinc-800" id="stats-section">
+  <div class="max-w-screen-2xl mx-auto px-6 md:px-12 py-lg grid grid-cols-1 md:grid-cols-3 gap-lg text-center">
+    <div class="space-y-base">
+      <div id="viewsCounter" class="text-neon font-display-xl text-headline-lg font-black stat-animate">10M+</div>
+      <div class="font-label-sm text-zinc-500 tracking-widest uppercase">Organic Views</div>
+    </div>
+    <div class="space-y-base">
+      <div id="videosCounter" class="text-white font-display-xl text-headline-lg font-black stat-animate">100+</div>
+      <div class="font-label-sm text-zinc-500 tracking-widest uppercase">High-Performance Videos</div>
+    </div>
+    <div class="space-y-base">
+      <div id="countriesCounter" class="text-neon font-display-xl text-headline-lg font-black stat-animate">5+</div>
+      <div class="font-label-sm text-zinc-500 tracking-widest uppercase">Countries Reached</div>
+    </div>
+  </div>
+</section>
+<!-- Helper for formatting -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Easing function
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+    // Helper for formatting
+    function formatViews(val) {
+      return Math.round(val / 1000000) + 'M+';
+    }
+    function formatPlus(val) {
+      return val + '+';
+    }
+    // Slot machine randomizer
+    function randomInArray(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+    // Animation logic
+    function animateSlotCounter(el, values, finalValue, format, duration, slowDownDuration) {
+      const startTime = performance.now();
+      const endTime = startTime + duration;
+      const slowStart = endTime - slowDownDuration;
+      let lastValue = null;
+      function update(now) {
+        let t = (now - startTime) / duration;
+        if (t > 1) t = 1;
+        let displayValue;
+        if (now < slowStart) {
+          // Fast random changes
+          displayValue = randomInArray(values);
+        } else if (now < endTime) {
+          // Slow down
+          let slowT = (now - slowStart) / slowDownDuration;
+          slowT = Math.min(slowT, 1);
+          // Interpolate between random and final value
+          if (slowT < 0.85) {
+            displayValue = randomInArray(values);
+          } else {
+            displayValue = finalValue;
+          }
+        } else {
+          displayValue = finalValue;
+        }
+        if (displayValue !== lastValue) {
+          el.textContent = format(displayValue);
+          lastValue = displayValue;
+        }
+        el.classList.add('stat-glow');
+        if (now < endTime) {
+          requestAnimationFrame(update);
+        } else {
+          el.textContent = format(finalValue);
+          el.classList.remove('stat-glow');
+        }
+      }
+      requestAnimationFrame(update);
+    }
+    // Get elements
+    const viewsEl = document.getElementById('viewsCounter');
+    const videosEl = document.getElementById('videosCounter');
+    const countriesEl = document.getElementById('countriesCounter');
+    if (viewsEl && videosEl && countriesEl) {
+            const duration = 7000;
+            const slowDownDuration = 1500;
+            animateSlotCounter(
+                viewsEl,
+                [1000000, 7000000, 3000000, 15000000, 8000000, 12000000, 4000000, 9000000, 2000000, 6000000, 11000000, 5000000, 10000000],
+                10000000,
+                formatViews,
+                duration,
+                slowDownDuration
+            );
+            animateSlotCounter(
+                videosEl,
+                [15, 72, 134, 58, 91, 110, 40, 99, 87, 120, 100],
+                100,
+                formatPlus,
+                duration,
+                slowDownDuration
+            );
+            animateSlotCounter(
+                countriesEl,
+                [1, 8, 3, 6, 2, 7, 4, 5],
+                5,
+                formatPlus,
+                duration,
+                slowDownDuration
+            );
+    }
+  });
+</script>
+<style>
+.stat-animate {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.stat-glow {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px 2px #d4ff00cc, 0 2px 16px 0 #0a0a0a;
+}
+</style>
+<!-- Services Section -->
+<section id="services" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-md">
+                ENGINEERED <span class="text-neon">SERVICES</span>
+</h2>
+<div class="h-1 w-24 bg-neon"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- YouTube Automation -->
+<div class="bg-surface-container border border-zinc-800 p-md glow-border transition-all duration-300 group">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-neon text-4xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-md uppercase">YouTube Automation</h3>
+<p class="font-body-md text-zinc-400">Scaling channels without personal presence. High-efficiency production pipelines designed for scale.</p>
+</div>
+<!-- Content Strategy -->
+<div class="bg-surface-container border border-zinc-800 p-md glow-border transition-all duration-300 group">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-neon text-4xl" data-icon="troubleshoot">troubleshoot</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-md uppercase">Content Strategy</h3>
+<p class="font-body-md text-zinc-400">Data-driven roadmaps to navigate the algorithm. We build frameworks for virality and retention.</p>
+</div>
+<!-- Video Editing -->
+<div class="bg-surface-container border border-zinc-800 p-md glow-border transition-all duration-300 group">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-neon text-4xl" data-icon="movie_edit">movie_edit</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-md uppercase">Video Editing</h3>
+<p class="font-body-md text-zinc-400">Cinetic editing styles that maintain engagement. Every frame is optimized for high-retention performance.</p>
+</div>
+<!-- Channel Growth -->
+<div class="bg-surface-container border border-zinc-800 p-md glow-border transition-all duration-300 group">
+<div class="mb-lg">
+<span class="material-symbols-outlined text-neon text-4xl" data-icon="trending_up">trending_up</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-md uppercase">Channel Growth</h3>
+<p class="font-body-md text-zinc-400">Holistic management from SEO to monetization. We turn viewers into high-value revenue streams.</p>
+</div>
+</div>
+</section>
+<!-- Process Section -->
+<section class="bg-black py-xl overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-6 md:px-12">
+<h2 class="font-headline-lg text-headline-lg text-white text-center uppercase mb-xl">The Growth <span class="text-neon">Protocol</span></h2>
+<div class="grid grid-cols-1 md:grid-cols-4 relative">
+<!-- Step 1 -->
+<div class="relative p-md border-l md:border-l-0 md:border-t border-zinc-800 pt-md">
+<div class="absolute -top-3 md:-top-3 left-0 md:left-0 bg-neon text-black font-black w-6 h-6 flex items-center justify-center">1</div>
+<h4 class="font-headline-md text-2xl text-white mb-sm uppercase">Research</h4>
+<p class="text-zinc-500">Market analysis and competitor deep-dives to find your blue ocean.</p>
+</div>
+<!-- Step 2 -->
+<div class="relative p-md border-l md:border-l-0 md:border-t border-zinc-800 pt-md">
+<div class="absolute -top-3 md:-top-3 left-0 md:left-0 bg-white text-black font-black w-6 h-6 flex items-center justify-center">2</div>
+<h4 class="font-headline-md text-2xl text-white mb-sm uppercase">Creation</h4>
+<p class="text-zinc-500">High-fidelity production using our proven cinematic kineticism framework.</p>
+</div>
+<!-- Step 3 -->
+<div class="relative p-md border-l md:border-l-0 md:border-t border-zinc-800 pt-md">
+<div class="absolute -top-3 md:-top-3 left-0 md:left-0 bg-neon text-black font-black w-6 h-6 flex items-center justify-center">3</div>
+<h4 class="font-headline-md text-2xl text-white mb-sm uppercase">Optimization</h4>
+<p class="text-zinc-500">Split-testing thumbnails and metadata to maximize click-through rates.</p>
+</div>
+<!-- Step 4 -->
+<div class="relative p-md border-l md:border-l-0 md:border-t border-zinc-800 pt-md">
+<div class="absolute -top-3 md:-top-3 left-0 md:left-0 bg-white text-black font-black w-6 h-6 flex items-center justify-center">4</div>
+<h4 class="font-headline-md text-2xl text-white mb-sm uppercase">Scaling</h4>
+<p class="text-zinc-500">Aggressive expansion and diversification into high-monetization funnels.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Studies Section -->
+<section id="work" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-xl">Performance <span class="text-neon">Log</span></h2>
+<div class="performance-slider">
+    <div class="performance-track">
+        <!-- Card 1: Modern, readable, large screenshot, metrics beside image -->
+        <div class="case-card">
+            <span class="case-badge">TECH NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/1.png" alt="Tech Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 12K → 250K Subscribers</div>
+                    <div class="case-metric-revenue"> $800/mo → $45K/mo</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="case-card">
+            <span class="case-badge">FINANCE NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/2.png" alt="Finance Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 0 → 85K Subscribers</div>
+                    <div class="case-metric-revenue"> $0/mo → $12K/mo</div>
+                </div>
+            </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="case-card">
+            <span class="case-badge">BUSINESS NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/3.png" alt="Business Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 5K → 120K Subscribers</div>
+                    <div class="case-metric-revenue"> $500/mo → $18K/mo</div>
+                </div>
+            </div>
+        </div>
+        <!-- Duplicated Cards for Infinite Loop -->
+        <div class="case-card">
+            <span class="case-badge">TECH NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/1.png" alt="Tech Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 12K → 250K Subscribers</div>
+                    <div class="case-metric-revenue"> $800/mo → $45K/mo</div>
+                </div>
+            </div>
+        </div>
+        <div class="case-card">
+            <span class="case-badge">FINANCE NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/2.png" alt="Finance Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 0 → 85K Subscribers</div>
+                    <div class="case-metric-revenue"> $0/mo → $12K/mo</div>
+                </div>
+            </div>
+        </div>
+        <div class="case-card">
+            <span class="case-badge">BUSINESS NICHE</span>
+            <div class="case-content">
+                <div class="case-img-wrap">
+                    <img src="images/3.png" alt="Business Niche Screenshot" />
+                </div>
+                <div class="case-metrics">
+                    <div class="case-metric-main"> 5K → 120K Subscribers</div>
+                    <div class="case-metric-revenue"> $500/mo → $18K/mo</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+
+/* Modern Case Study Card Styles */
+.performance-slider {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+.performance-track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: scrollLeft 30s linear infinite;
+}
+.performance-slider:hover .performance-track {
+    animation-play-state: paused;
+}
+.case-card {
+    background: #0A0A0A;
+    border-radius: 20px;
+    border: 1.5px solid rgba(212,255,0,0.10);
+    box-shadow: 0 2px 24px 0 rgba(0,0,0,0.18);
+    overflow: hidden;
+    min-width: 540px;
+    max-width: 540px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.25s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+    outline: 0.5px solid #d4ff0033;
+}
+.case-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 3px #d4ff0033, 0 2px 32px 0 #0a0a0a;
+}
+.case-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #d4ff00;
+    color: #0A0A0A;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 28px 10px 22px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 8px 0 rgba(212,255,0,0.10);
+    letter-spacing: 0.04em;
+}
+.case-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 32px 32px 24px 32px;
+}
+.case-img-wrap {
+    flex: 1 1 0%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+.case-img-wrap img {
+    width: 90%;
+    max-width: 90%;
+    height: auto;
+    max-height: 540px;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 0 0 2px #d4ff0033, 0 2px 16px 0 #0a0a0a;
+    background: #181818;
+    display: block;
+}
+.case-metrics {
+    flex: 0 0 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+    font-size: 1.18rem;
+    font-weight: 600;
+    color: #fff;
+    line-height: 1.4;
+    padding-left: 0;
+}
+.case-metric-main {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.01em;
+}
+.case-metric-revenue {
+    color: #d4ff00;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-top: 2px;
+}
+@media (max-width: 900px) {
+    .case-card {
+        min-width: 96vw;
+        max-width: 96vw;
+    }
+    .case-content {
+        flex-direction: column;
+        gap: 18px;
+        padding: 18px 8px 18px 8px;
+    }
+    .case-img-wrap img {
+        width: 100%;
+        max-width: 100%;
+        max-height: 340px;
+    }
+    .case-metrics {
+        flex: unset;
+        align-items: flex-start;
+        padding-left: 0;
+        font-size: 1.05rem;
+    }
+}
+.performance-track::-webkit-scrollbar {
+    display: none;
+}
+.performance-slider::-webkit-scrollbar {
+    display: none;
+}
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+</style>
+</section>
+<!-- Why Choose Us -->
+<section id="why" class="bg-surface-container-low py-xl">
+<div class="max-w-screen-2xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-xl items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-lg">WHY <span class="text-neon">MOTION FLICKS</span></h2>
+<ul class="space-y-md">
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">Proven Viral Frameworks</h4>
+<p class="text-zinc-500 text-sm">We don't guess. We follow battle-tested psychological structures that trigger the algorithm.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">High-Performance Production</h4>
+<p class="text-zinc-500 text-sm">Cinema-grade editing and sound design that keeps viewers glued to the screen.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">Monetization-First Thinking</h4>
+<p class="text-zinc-500 text-sm">We don't just build views; we build revenue funnels for sustainable brand growth.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="relative w-full h-full flex items-center justify-center">
+    <img 
+        src="./images/11.png" 
+        alt="Camera Lens Cinematic" 
+        class="w-full h-full object-cover border border-zinc-800" 
+        style="display:block;object-position:center;"/>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto">
+<h2 class="font-headline-lg text-headline-lg text-white text-center uppercase mb-xl">Client <span class="text-neon">Transmission</span></h2>
+<div class="testimonial-slider">
+<div class="testimonial-track">
+<!-- Testimonial 1 -->
+<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
+<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
+<p class="text-white font-body-lg italic relative z-10">"Motion Flicks took our dead channel and turned it into a $50k/month revenue machine in under a year. Their editing style is unmatched."</p>
+<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a successful male entrepreneur in a black minimalist suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjz6c9Nbw_tjZZe6WEOdJ5IYoPmHbCZUVPWJGaWL8dCy3uBgqbcb1keHrU0xM7dk3SUB8AMUHwxnIuyZFgsjp3zOwtkZ-UTyzmqCOKcLY2lFhRYIkXQXiz0-sL3GruLJ1vijFqRYtcxD0DJqJ2vOE6QRT7xAxaaZCe0iJeqsL9a6lu0DycmpeFdTTptEl2Qu9Q5FG_0Ys-NWtK7DHMGGz6ZXsZFW6_tQhwnEZQwug5YsM2W7eW-CWpZul04itXa1NDrgx8MavFcQl"/>
+<div>
+<div class="text-white font-bold font-label-sm">Marcus V.</div>
+<div class="text-neon text-xs font-label-sm">CEO, TECHSTACK</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
+<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
+<p class="text-white font-body-lg italic relative z-10">"The scale at which they operate is insane. We went from 500 views per video to 1M+ views consistently. Best investment we've made."</p>
+<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a confident female digital creator with sleek modern styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCot9B4R4H_6vlAi7ZRAnW2F0-pQ7nuOclabV1QweiP4EB22J6kdcP7jNPYvKfTBSZrQWZsPpVrcq8MYbDw0SkTPkay6AD8RRJRgrDC12WE7WvYAcshK5mkpgAryjRUhNKAAVQPj-BJwZ1M2aD408t0dHx4-0XruP3E97_5Bw436InT-eRrXanMB7KAkLt_pgtZCdTS222p8Ks66Y-XnzEy3wB6AZ_bHTXqDD_khNJFbm8t6JqiiZpQR__MIEsgch2SDTJPI3sk1gH1"/>
+<div>
+<div class="text-white font-bold font-label-sm">Sarah Jane</div>
+<div class="text-neon text-xs font-label-sm">FOUNDER, CREATIVEHUB</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 1 Duplicate -->
+<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
+<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
+<p class="text-white font-body-lg italic relative z-10">"Motion Flicks took our dead channel and turned it into a $50k/month revenue machine in under a year. Their editing style is unmatched."</p>
+<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a successful male entrepreneur in a black minimalist suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjz6c9Nbw_tjZZe6WEOdJ5IYoPmHbCZUVPWJGaWL8dCy3uBgqbcb1keHrU0xM7dk3SUB8AMUHwxnIuyZFgsjp3zOwtkZ-UTyzmqCOKcLY2lFhRYIkXQXiz0-sL3GruLJ1vijFqRYtcxD0DJqJ2vOE6QRT7xAxaaZCe0iJeqsL9a6lu0DycmpeFdTTptEl2Qu9Q5FG_0Ys-NWtK7DHMGGz6ZXsZFW6_tQhwnEZQwug5YsM2W7eW-CWpZul04itXa1NDrgx8MavFcQl"/>
+<div>
+<div class="text-white font-bold font-label-sm">Marcus V.</div>
+<div class="text-neon text-xs font-label-sm">CEO, TECHSTACK</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 Duplicate -->
+<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
+<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
+<p class="text-white font-body-lg italic relative z-10">"The scale at which they operate is insane. We went from 500 views per video to 1M+ views consistently. Best investment we've made."</p>
+<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a confident female digital creator with sleek modern styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCot9B4R4H_6vlAi7ZRAnW2F0-pQ7nuOclabV1QweiP4EB22J6kdcP7jNPYvKfTBSZrQWZsPpVrcq8MYbDw0SkTPkay6AD8RRJRgrDC12WE7WvYAcshK5mkpgAryjRUhNKAAVQPj-BJwZ1M2aD408t0dHx4-0XruP3E97_5Bw436InT-eRrXanMB7KAkLt_pgtZCdTS222p8Ks66Y-XnzEy3wB6AZ_bHTXqDD_khNJFbm8t6JqiiZpQR__MIEsgch2SDTJPI3sk1gH1"/>
+<div>
+<div class="text-white font-bold font-label-sm">Sarah Jane</div>
+<div class="text-neon text-xs font-label-sm">FOUNDER, CREATIVEHUB</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-xl px-6 md:px-12">
+<div class="max-w-screen-2xl mx-auto bg-neon p-lg md:p-xl text-black text-center space-y-md">
+<h2 class="font-display-xl text-display-xl uppercase leading-none">Let’s Turn Your YouTube Into a <span class="text-black/60">Revenue Machine</span></h2>
+<p class="text-xl font-medium max-w-2xl mx-auto pb-md">Stop leaving money on the table. Join the high-performance content revolution today.</p>
+<a href="https://calendly.com/anandsingh-6337/30min?back=1&month=2026-04" target="_blank" class="bg-black text-neon font-label-sm px-xl py-lg text-xl font-black uppercase hover:scale-105 active:scale-95 transition-all inline-block cursor-pointer">
+                BOOK A CALL NOW
+            </a>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-black dark:bg-black border-t border-zinc-800 dark:border-zinc-900 w-full py-xl px-6 md:px-12">
+<div class="max-w-screen-2xl mx-auto">
+<div class="footer-container">
+<!-- Footer Left: Logo -->
+<div class="footer-left">
+<div class="footer-logo">MOTION FLICKS</div>
+<div class="footer-copyright">© 2024 MOTION FLICKS. ENGINEERED FOR HIGH PERFORMANCE.</div>
+</div>
+<!-- Footer Right: Social Links -->
+<div class="footer-right">
+<a class="footer-link" href="#" target="_blank">CALENDLY</a>
+<a class="footer-link" href="#" target="_blank">LINKEDIN</a>
+<a class="footer-link" href="#" target="_blank">TWITTER</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    // Navbar Active State Management
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('section[id]');
+        
+        // Click handler: set active on click
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                this.classList.add('active');
+            });
+        });
+        
+        // Scroll handler: update active state based on scroll position
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    });
+</script>
+</body></html>
