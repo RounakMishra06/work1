@@ -229,6 +229,59 @@
             border-bottom: 2px solid #D4FF00;
             padding-bottom: 0.25rem;
         }
+
+        .mobile-menu-toggle {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(212,255,0,0.35);
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #d4ff00;
+            background: rgba(212,255,0,0.08);
+            font-size: 20px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 12px rgba(212,255,0,0.35);
+            background: rgba(212,255,0,0.16);
+        }
+
+        .mobile-menu {
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-8px);
+            overflow: hidden;
+            background: #000;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.35s ease;
+        }
+
+        .mobile-menu.open {
+            max-height: 480px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 16px 24px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            color: #d4ff00;
+            background: rgba(212,255,0,0.08);
+        }
         
         /* Footer Styles */
         .footer-container {
@@ -401,6 +454,16 @@
                 Contact Info
             </a>
 </div>
+<button id="mobileMenuToggle" class="md:hidden mobile-menu-toggle" aria-controls="mobileMenu" aria-expanded="false" aria-label="Open navigation menu">
+    ☰
+</button>
+</div>
+<div id="mobileMenu" class="mobile-menu md:hidden">
+    <a href="#services" class="mobile-menu-link">Services</a>
+    <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
+    <a href="#client-transmission" class="mobile-menu-link">Our Work</a>
+    <a href="#why" class="mobile-menu-link">Why Us</a>
+    <a href="#contact-info" class="mobile-menu-link">Contact Info</a>
 </div>
 </nav>
 <!-- Hero Section -->
@@ -1052,6 +1115,9 @@
     document.addEventListener('DOMContentLoaded', function() {
         const navLinks = document.querySelectorAll('.nav-link');
         const sections = document.querySelectorAll('section[id]');
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-menu-link');
         
         // Click handler: set active on click
         navLinks.forEach(link => {
@@ -1083,6 +1149,20 @@
                 }
             });
         });
+
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.addEventListener('click', function() {
+                const isOpen = mobileMenu.classList.toggle('open');
+                mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
     });
 </script>
 <script>
