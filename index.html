@@ -529,6 +529,14 @@
             align-items: center;
             gap: 20px;
             margin-top: 32px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .founder-profile:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 18px rgba(212,255,0,0.18);
         }
 
         .founder-image {
@@ -567,6 +575,71 @@
             font-style: italic;
             margin-top: 10px;
             max-width: 420px;
+        }
+
+        .why-shell {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 80px;
+        }
+
+        .why-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                "left image"
+                "founder image";
+            column-gap: clamp(80px, 10vw, 120px);
+            row-gap: 40px;
+            align-items: center;
+        }
+
+        .why-left {
+            grid-area: left;
+        }
+
+        .why-image-wrap {
+            grid-area: image;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .why-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            border: 1px solid rgba(212,255,0,0.25);
+            box-shadow: 0 0 18px rgba(212,255,0,0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .why-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 24px rgba(212,255,0,0.25);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: clamp(80px, 10vw, 120px);
+            row-gap: 60px;
+        }
+
+        .why-card {
+            padding: 28px 24px;
+            gap: 32px;
+            align-items: flex-start;
+        }
+
+        .why-icon {
+            margin-top: 0;
+        }
+
+        .why-founder {
+            grid-area: founder;
+            margin-top: 40px;
         }
 
         .fade-in-on-scroll {
@@ -839,6 +912,51 @@
             .founder-quote {
                 max-width: 320px;
             }
+
+            .why-shell {
+                padding: 80px 32px;
+            }
+
+            .why-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                grid-template-areas:
+                    "left"
+                    "image"
+                    "founder";
+                row-gap: 40px;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+                column-gap: 32px;
+                row-gap: 28px;
+            }
+
+            .why-card {
+                padding: 22px 18px;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .why-shell {
+                padding: 90px 48px;
+            }
+
+            .why-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                grid-template-areas:
+                    "left"
+                    "image"
+                    "founder";
+                row-gap: 40px;
+            }
+
+            .why-image {
+                max-width: 480px;
+            }
         }
 
         @media (max-width: 425px) {
@@ -895,7 +1013,7 @@
         alt="Motion Flicks"
         class="h-11 md:h-14 w-auto object-contain transition-all duration-300 hover:scale-105"
     />
-<div class="hidden md:flex gap-base">
+<div class="hidden md:flex gap-base items-center">
 <a class="nav-link font-label-sm" href="#services">SERVICES</a>
 <a class="nav-link font-label-sm" href="#testimonials">TESTIMONIALS</a>
 <a class="nav-cta font-label-sm" href="#why">WHY US?</a>
@@ -917,7 +1035,7 @@
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="hero hero-section relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+<section id="home" class="hero hero-section relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
 <div class="absolute inset-0 z-0">
 <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-background to-background z-10"></div>
 <img class="w-full h-full object-cover opacity-30 grayscale" data-alt="Cinematic high-tech setup with neon green lighting, multiple monitors showing video editing timelines, atmospheric smoke and sharp lens flares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvtzfHFTqrKo9XtqBU8rTUs1x69fdeTeVRGfnOCs1t9oS7DQJHd14LZpQ69veUmArCdfhdAkJ78j5RufHaML5cU-teS2wW9mLm97t1_Wh_PEDW6EEdZ0FtdVPRBaWuWkfM_CueKzSA-Ly7YCT2gF8kH-4MHL58_p3PJsMszGHVGq3VFrxGU_52c1Gb2qFRCx1DM2Y02-qRZfdEDM6MYz0y6R2JzYmvFb1zW-Or4G6k1CA4LFd6zHCUipEZaLjRyltrMzqwcMpGbRuR"/>
@@ -1453,13 +1571,14 @@
 </style>
 </section>
 <!-- Why Choose Us -->
-<section id="why" class="bg-surface-container-low py-xl">
-<div class="max-w-screen-2xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-20">
-<div class="md:pr-6 lg:pr-10 max-w-[520px]">
-<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-lg">WHY <span class="text-neon">MOTION FLICKS</span></h2>
-<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-md gap-x-lg">
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<section id="why" class="bg-surface-container-low">
+<div class="why-shell">
+<div class="why-layout">
+<div class="why-left">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-lg">WHY <span class="text-neon">MOTION FLICKS?</span></h2>
+<ul class="why-grid">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1467,8 +1586,8 @@
 <p class="text-zinc-500 text-sm">We build automated workflows that handle research, planning, creation, publishing, and optimization at scale.</p>
 </div>
 </li>
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1476,8 +1595,8 @@
 <p class="text-zinc-500 text-sm">Every piece of content is strategically structured for stronger watch time, engagement, audience retention, and conversion.</p>
 </div>
 </li>
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1485,8 +1604,8 @@
 <p class="text-zinc-500 text-sm">We transform one idea into platform-native content across YouTube, Instagram, TikTok, LinkedIn, X, and more.</p>
 </div>
 </li>
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1494,8 +1613,8 @@
 <p class="text-zinc-500 text-sm">Audience behavior, analytics, trend tracking, and performance insights guide every creative and marketing decision.</p>
 </div>
 </li>
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1503,8 +1622,8 @@
 <p class="text-zinc-500 text-sm">Our workflows are designed to increase visibility, attract inbound opportunities, strengthen brand authority, and drive monetization.</p>
 </div>
 </li>
-<li class="flex items-start gap-md group">
-<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<li class="why-card flex items-start group">
+<div class="why-icon mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
@@ -1513,21 +1632,22 @@
 </div>
 </li>
 </ul>
-<div class="founder-profile fade-in-on-scroll">
+</div>
+<div class="why-image-wrap">
+    <img 
+        src="./images/11.png" 
+        alt="Camera Lens Cinematic" 
+    class="why-image h-auto object-contain" 
+        style="display:block;object-position:center;"/>
+</div>
+<a class="founder-profile fade-in-on-scroll why-founder" href="#home" aria-label="Back to top">
     <img src="images/100.png" alt="Founder Anand" class="founder-image" />
     <div>
         <div class="founder-name">ANAND</div>
         <div class="founder-title">Founder &amp; CEO, Motion Flicks</div>
         
     </div>
-</div>
-</div>
-<div class="relative w-full flex items-center justify-center md:justify-end">
-    <img 
-        src="./images/11.png" 
-        alt="Camera Lens Cinematic" 
-    class="w-full max-w-[520px] lg:max-w-[550px] h-auto object-contain border border-zinc-800" 
-        style="display:block;object-position:center;"/>
+</a>
 </div>
 </div>
 </section>
@@ -1794,7 +1914,6 @@
 <div class="footer-column-title">QUICK LINKS</div>
 <div class="footer-links">
 <a class="footer-link" href="#services">Services</a>
-<a class="footer-link" href="#client-transmission">Our Work</a>
 <a class="footer-link" href="#testimonials">Testimonials</a>
 <a class="footer-link" href="#why">Why Us?</a>
 </div>
