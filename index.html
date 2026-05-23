@@ -100,6 +100,27 @@
       }
     </script>
 <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        section {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
         html {
             scroll-behavior: smooth;
         }
@@ -182,11 +203,201 @@
             flex: 0 0 450px;
             min-width: 450px;
         }
+
+        .proof-slide {
+            flex: 0 0 720px;
+            min-width: 720px;
+        }
+
+        .proof-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(204,255,0,0.25);
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            padding: 32px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .proof-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 0 24px rgba(212,255,0,0.25), 0 18px 50px rgba(0,0,0,0.4);
+        }
+
+        .proof-badge {
+            align-self: flex-start;
+            background: rgba(212,255,0,0.16);
+            border: 1px solid rgba(212,255,0,0.6);
+            color: #d4ff00;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            padding: 8px 14px;
+            border-radius: 999px;
+        }
+
+        .proof-media {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .proof-media-item {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .proof-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .proof-card:hover .proof-image {
+            transform: scale(1.03);
+        }
+
+        .analytics-glow {
+            box-shadow: 0 0 18px rgba(212,255,0,0.28);
+        }
+
+        .proof-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .proof-name {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .proof-role {
+            color: #d4ff00;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.78rem;
+        }
+
+        .proof-business {
+            color: #c6c6c6;
+            font-size: 0.95rem;
+        }
+
+        .proof-results-title {
+            color: #ffffff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.75rem;
+            margin-top: 6px;
+        }
+
+        .proof-results {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 6px;
+            color: #e2e2e2;
+            font-size: 0.95rem;
+        }
+
+        .proof-results li::before {
+            content: "•";
+            color: #d4ff00;
+            margin-right: 8px;
+        }
+
+        .proof-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 60;
+            padding: 24px;
+        }
+
+        .proof-lightbox.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .proof-lightbox-content {
+            max-width: 900px;
+            width: 100%;
+            background: #0b0b0b;
+            border-radius: 20px;
+            border: 1px solid rgba(212,255,0,0.35);
+            padding: 16px;
+            position: relative;
+            box-shadow: 0 0 24px rgba(212,255,0,0.2);
+        }
+
+        .proof-lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .proof-lightbox-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 999px;
+            border: 1px solid rgba(212,255,0,0.4);
+            background: rgba(212,255,0,0.1);
+            color: #d4ff00;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
         
         @media (max-width: 768px) {
             .testimonial-slide {
                 flex: 0 0 320px;
                 min-width: 320px;
+            }
+
+            .proof-slide {
+                flex: 0 0 90vw;
+                min-width: 90vw;
+            }
+
+            .proof-card {
+                padding: 24px;
+            }
+
+            .proof-media {
+                grid-template-columns: 1fr;
+            }
+
+            .proof-media-item {
+                height: 200px;
             }
             
             .testimonial-track {
@@ -211,7 +422,9 @@
             text-transform: uppercase;
             border: 1px solid #D4FF00;
             border-radius: 999px;
-            padding: 10px 18px;
+            padding: 7px 14px;
+            font-size: 12px;
+            line-height: 1;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
         .nav-cta:hover {
@@ -228,6 +441,17 @@
             color: #D4FF00;
             border-bottom: 2px solid #D4FF00;
             padding-bottom: 0.25rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 4vw, 1.2rem);
+            line-height: 1.7;
         }
 
         .mobile-menu-toggle {
@@ -281,6 +505,62 @@
         .mobile-menu a:hover {
             color: #d4ff00;
             background: rgba(212,255,0,0.08);
+        }
+
+        .founder-profile {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .founder-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 999px;
+            border: 2px solid rgba(212,255,0,0.6);
+            box-shadow: 0 0 18px rgba(212,255,0,0.25);
+            object-fit: cover;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .founder-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 28px rgba(212,255,0,0.35);
+        }
+
+        .founder-name {
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .founder-title {
+            color: #d4ff00;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            margin-top: 6px;
+        }
+
+        .founder-quote {
+            color: #a1a1a1;
+            font-style: italic;
+            margin-top: 10px;
+            max-width: 420px;
+        }
+
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         /* Footer Styles */
@@ -430,6 +710,162 @@
             .footer-logo-img {
                 height: 50px;
             }
+
+            .hero {
+                padding-top: 120px;
+                padding-bottom: 80px;
+                padding-left: 24px;
+                padding-right: 24px;
+                overflow: hidden;
+            }
+
+            .hero-content,
+            .hero-container {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 24px;
+                box-sizing: border-box;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .hero h1,
+            .hero-title {
+                font-size: clamp(3rem, 12vw, 4.5rem) !important;
+                line-height: 0.95 !important;
+                font-weight: 800;
+                letter-spacing: -2px;
+                text-align: center;
+                word-break: normal;
+                overflow-wrap: break-word;
+                max-width: 95%;
+                margin: 0 auto;
+            }
+
+            .hero-subtitle {
+                max-width: 320px;
+                font-size: 16px;
+                line-height: 1.7;
+                text-align: center;
+                margin-top: 24px;
+            }
+
+            .hero-actions {
+                width: 100%;
+                align-items: center;
+                gap: 18px;
+                margin-top: 30px;
+            }
+
+            .hero-actions > a,
+            .hero-actions > button {
+                width: 100%;
+                max-width: 320px;
+                height: 58px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .hero-section h1,
+            .hero-section p,
+            .hero-section .inline-block {
+                text-align: center;
+            }
+
+            .hero-section .flex {
+                width: 100%;
+            }
+
+            .hero-section .flex > a,
+            .hero-section .flex > button {
+                width: 100%;
+            }
+
+            .performance-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .case-card {
+                min-width: 88vw;
+                max-width: 88vw;
+            }
+
+            .case-img-wrap img {
+                max-height: 300px;
+            }
+
+            .performance-arrows {
+                justify-content: center;
+            }
+
+            .mobile-menu {
+                width: 100%;
+            }
+
+            .founder-profile {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                margin-top: 28px;
+            }
+
+            .founder-image {
+                width: 140px;
+                height: 140px;
+            }
+
+            .founder-quote {
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .hero-title {
+                font-size: clamp(2.2rem, 10vw, 3.25rem);
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .case-card {
+                min-width: 92vw;
+                max-width: 92vw;
+            }
+
+            .case-content {
+                padding: 16px 10px 16px 10px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .hero-title {
+                font-size: clamp(2rem, 11vw, 3rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.98rem;
+            }
+
+            .case-card {
+                min-width: 94vw;
+                max-width: 94vw;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .hero-title {
+                font-size: clamp(1.85rem, 12vw, 2.6rem);
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -445,11 +881,9 @@
 <div class="hidden md:flex gap-base">
 <a class="nav-link font-label-sm" href="#services">SERVICES</a>
 <a class="nav-link font-label-sm" href="#testimonials">TESTIMONIALS</a>
-<a class="nav-link font-label-sm" href="#client-transmission">OUR WORK</a>
-
+<a class="nav-cta font-label-sm" href="#why">WHY US?</a>
 </div>
 <div class="hidden md:flex items-center gap-base">
-<a class="nav-cta font-label-sm" href="#why">WHY US?</a>
 <a href="#contact-info" class="bg-neon text-on-primary-fixed font-label-sm px-md py-sm active:scale-95 duration-150 ease-in-out inline-block cursor-pointer hover:scale-105 transition-transform">
                 Contact Info
             </a>
@@ -461,40 +895,39 @@
 <div id="mobileMenu" class="mobile-menu md:hidden">
     <a href="#services" class="mobile-menu-link">Services</a>
     <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
-    <a href="#client-transmission" class="mobile-menu-link">Our Work</a>
     <a href="#why" class="mobile-menu-link">Why Us</a>
     <a href="#contact-info" class="mobile-menu-link">Contact Info</a>
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
+<section class="hero hero-section relative min-h-screen flex items-center justify-center pt-20 px-6 overflow-hidden">
 <div class="absolute inset-0 z-0">
 <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-background to-background z-10"></div>
 <img class="w-full h-full object-cover opacity-30 grayscale" data-alt="Cinematic high-tech setup with neon green lighting, multiple monitors showing video editing timelines, atmospheric smoke and sharp lens flares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvtzfHFTqrKo9XtqBU8rTUs1x69fdeTeVRGfnOCs1t9oS7DQJHd14LZpQ69veUmArCdfhdAkJ78j5RufHaML5cU-teS2wW9mLm97t1_Wh_PEDW6EEdZ0FtdVPRBaWuWkfM_CueKzSA-Ly7YCT2gF8kH-4MHL58_p3PJsMszGHVGq3VFrxGU_52c1Gb2qFRCx1DM2Y02-qRZfdEDM6MYz0y6R2JzYmvFb1zW-Or4G6k1CA4LFd6zHCUipEZaLjRyltrMzqwcMpGbRuR"/>
 </div>
-<div class="relative z-20 text-center max-w-5xl mx-auto space-y-lg">
+<div class="hero-container hero-content relative z-20 text-center max-w-5xl mx-auto space-y-lg">
 <span class="inline-block border border-neon/30 bg-neon/5 px-base py-xs text-neon font-label-sm tracking-widest mb-md">
                 AI WORKFLOWS THAT PRINT PIPELINE
             </span>
-<h1 class="font-display-xl text-display-xl uppercase text-white leading-tight">
+<h1 class="hero-title font-display-xl text-display-xl uppercase text-white leading-tight">
                 YOUR EXPERTISE. AUTOMATED INTO REVENUE.
             </h1>
-<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl mx-auto">
+<p class="hero-subtitle font-body-lg text-body-lg text-zinc-400 max-w-2xl mx-auto">
                 We build end to end AI content machines for businesses scripting, production, publishing, monetization, and lead generation on autopilot. One custom system. Every platform. Compounding growth. Zero overhead.
             </p>
-<div class="flex flex-col md:flex-row items-center justify-center gap-md pt-md">
+<div class="hero-actions flex flex-col md:flex-row items-center justify-center gap-md pt-md">
 <a href="https://calendly.com/anandsingh-6337/30min?back=1&month=2026-04" target="_blank" class="w-full md:w-auto bg-neon text-on-primary-fixed font-label-sm px-xl py-md text-lg active:scale-95 duration-150 inline-block text-center cursor-pointer hover:scale-105 transition-transform">
                     BOOK A FREE STRATEGY CALL
                 </a>
 <a href="#client-transmission" class="w-full md:w-auto border border-white/20 text-white font-label-sm px-xl py-md text-lg hover:border-white transition-colors duration-200 text-center">
-                    VIEW CASE STUDIES
+                    VIEW CLIENT RESULTS
                 </a>
 </div>
 </div>
 </section>
 <!-- Social Proof / Metrics -->
 <section class="bg-surface-container-lowest border-y border-zinc-800" id="stats-section">
-  <div class="max-w-screen-2xl mx-auto px-6 md:px-12 py-lg grid grid-cols-1 md:grid-cols-3 gap-lg text-center">
+  <div class="max-w-screen-2xl mx-auto px-6 md:px-12 py-lg grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg text-center">
         <div class="space-y-base">
             <div id="viewsCounter" class="text-neon font-display-xl text-headline-lg font-black stat-animate">3B+</div>
             <div class="font-label-sm text-zinc-500 tracking-widest uppercase">ORGANIC VIEWS GENERATED</div>
@@ -507,6 +940,10 @@
             <div id="countriesCounter" class="text-neon font-display-xl text-headline-lg font-black stat-animate">11+</div>
             <div class="font-label-sm text-zinc-500 tracking-widest uppercase">COUNTRIES REACHED</div>
         </div>
+        <div class="space-y-base">
+            <div id="revenueCounter" class="text-white font-display-xl text-headline-lg font-black stat-animate">$1.5M+</div>
+            <div class="font-label-sm text-zinc-500 tracking-widest uppercase">REVENUE GENERATED</div>
+        </div>
   </div>    
 </section>
 <!-- Helper for formatting -->
@@ -516,7 +953,8 @@
         const viewsEl = document.getElementById('viewsCounter');
         const videosEl = document.getElementById('videosCounter');
         const countriesEl = document.getElementById('countriesCounter');
-        if (!statsSection || !viewsEl || !videosEl || !countriesEl) return;
+        const revenueEl = document.getElementById('revenueCounter');
+        if (!statsSection || !viewsEl || !videosEl || !countriesEl || !revenueEl) return;
 
         function easeOutCubic(t) {
             return 1 - Math.pow(1 - t, 3);
@@ -533,6 +971,34 @@
             return Math.round(val) + '+';
         }
 
+        function formatRevenue(val) {
+            if (val >= 1000000) {
+                const millionsRaw = val / 1000000;
+                const millions = Math.round(millionsRaw * 10) / 10;
+                const formatted = Number.isInteger(millions) ? millions.toString() : millions.toFixed(1);
+                return `$${formatted}M+`;
+            }
+            if (val >= 1000) {
+                const thousands = Math.round(val / 1000);
+                return `$${thousands}K`;
+            }
+            return `$${Math.round(val)}`;
+        }
+
+        function formatViews(val) {
+            if (val >= 1000000000) {
+                const billionsRaw = val / 1000000000;
+                const billions = Math.round(billionsRaw * 10) / 10;
+                const formatted = Number.isInteger(billions) ? billions.toString() : billions.toFixed(1);
+                return `${formatted}B+`;
+            }
+            if (val >= 1000000) {
+                const millions = Math.round(val / 1000000);
+                return `${millions}M`;
+            }
+            return Math.round(val).toString();
+        }
+
         function interpolateMilestones(t, milestones) {
             for (let i = 0; i < milestones.length - 1; i += 1) {
                 const current = milestones[i];
@@ -545,69 +1011,80 @@
             return milestones[milestones.length - 1].v;
         }
 
-        function animateCount(el, milestones, duration, formatter) {
+        function runCounters() {
+            viewsEl.textContent = '0';
+            videosEl.textContent = '0';
+            countriesEl.textContent = '0';
+            revenueEl.textContent = '$0';
+
+            const duration = 3000;
             const startTime = performance.now();
-            el.classList.add('stat-animating');
+            const viewsMilestones = [
+                { t: 0, v: 0 },
+                { t: 0.12, v: 100000000 },
+                { t: 0.25, v: 500000000 },
+                { t: 0.4, v: 1000000000 },
+                { t: 0.55, v: 1500000000 },
+                { t: 0.7, v: 2000000000 },
+                { t: 0.85, v: 2500000000 },
+                { t: 1, v: 3000000000 }
+            ];
+            const videosMilestones = [
+                { t: 0, v: 0 },
+                { t: 0.16, v: 50 },
+                { t: 0.32, v: 100 },
+                { t: 0.5, v: 200 },
+                { t: 0.68, v: 300 },
+                { t: 0.82, v: 400 },
+                { t: 1, v: 450 }
+            ];
+            const countriesMilestones = [
+                { t: 0, v: 0 },
+                { t: 0.18, v: 2 },
+                { t: 0.36, v: 4 },
+                { t: 0.54, v: 6 },
+                { t: 0.72, v: 8 },
+                { t: 0.88, v: 10 },
+                { t: 1, v: 11 }
+            ];
+            const revenueMilestones = [
+                { t: 0, v: 0 },
+                { t: 0.15, v: 100000 },
+                { t: 0.32, v: 300000 },
+                { t: 0.5, v: 700000 },
+                { t: 0.68, v: 1000000 },
+                { t: 0.84, v: 1200000 },
+                { t: 1, v: 1500000 }
+            ];
+
+            [viewsEl, videosEl, countriesEl, revenueEl].forEach((el) => {
+                el.classList.add('stat-animating');
+            });
 
             function update(now) {
                 const elapsed = now - startTime;
                 const t = Math.min(elapsed / duration, 1);
                 const eased = easeOutCubic(t);
-                const current = interpolateMilestones(eased, milestones);
-                el.textContent = formatter(current);
+
+                viewsEl.textContent = formatViews(interpolateMilestones(eased, viewsMilestones));
+                videosEl.textContent = formatPlus(interpolateMilestones(eased, videosMilestones));
+                countriesEl.textContent = formatPlus(interpolateMilestones(eased, countriesMilestones));
+                revenueEl.textContent = formatRevenue(interpolateMilestones(eased, revenueMilestones));
 
                 if (t < 1) {
                     requestAnimationFrame(update);
                 } else {
-                    el.textContent = formatter(milestones[milestones.length - 1].v);
-                    el.classList.remove('stat-animating');
+                    viewsEl.textContent = formatViews(viewsMilestones[viewsMilestones.length - 1].v);
+                    videosEl.textContent = formatPlus(videosMilestones[videosMilestones.length - 1].v);
+                    countriesEl.textContent = formatPlus(countriesMilestones[countriesMilestones.length - 1].v);
+                    revenueEl.textContent = formatRevenue(revenueMilestones[revenueMilestones.length - 1].v);
+                    [viewsEl, videosEl, countriesEl, revenueEl].forEach((el) => {
+                        el.classList.remove('stat-animating');
+                    });
                 }
             }
 
             requestAnimationFrame(update);
-        }
-
-        function runCounters() {
-            viewsEl.textContent = '0';
-            videosEl.textContent = '0';
-            countriesEl.textContent = '0';
-            animateCount(
-                viewsEl,
-                [
-                    { t: 0, v: 0 },
-                    { t: 0.2, v: 100000000 },
-                    { t: 0.4, v: 500000000 },
-                    { t: 0.6, v: 1000000000 },
-                    { t: 0.8, v: 2000000000 },
-                    { t: 1, v: 3000000000 }
-                ],
-                5000,
-                formatViews
-            );
-            animateCount(
-                videosEl,
-                [
-                    { t: 0, v: 0 },
-                    { t: 0.25, v: 50 },
-                    { t: 0.5, v: 150 },
-                    { t: 0.75, v: 300 },
-                    { t: 1, v: 450 }
-                ],
-                5000,
-                formatPlus
-            );
-            animateCount(
-                countriesEl,
-                [
-                    { t: 0, v: 0 },
-                    { t: 0.33, v: 3 },
-                    { t: 0.66, v: 6 },
-                    { t: 0.85, v: 9 },
-                    { t: 1, v: 11 }
-                ],
-                5000,
-                formatPlus
-            );
         }
 
         const observer = new IntersectionObserver(
@@ -710,10 +1187,10 @@
 </div>
 </section>
 <!-- Case Studies Section -->
-<section id="testimonials" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto performance-section">
-<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-xl">Performance <span class="text-neon">Log</span></h2>
+<section id="testimonials" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto performance-section" data-carousel="performance">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase mb-xl">TESTI<span class="text-neon">MONIALS</span></h2>
 <div class="marquee">
-    <div class="marquee-track">
+    <div class="marquee-track" data-carousel-track>
             <!-- Card 1: Modern, readable, large screenshot, metrics beside image -->
             <div class="case-card">
                 <span class="case-badge">TECH NICHE</span>
@@ -793,11 +1270,11 @@
     </div>
 </div>
 <div class="performance-arrows">
-    <button id="prevBtn">
+    <button id="prevBtn" data-carousel-prev>
         <i class="fa-solid fa-chevron-left"></i>
     </button>
 
-    <button id="nextBtn">
+    <button id="nextBtn" data-carousel-next>
         <i class="fa-solid fa-chevron-right"></i>
     </button>
 </div>
@@ -963,14 +1440,14 @@
 <div class="max-w-screen-2xl mx-auto px-6 md:px-12 flex flex-col md:flex-row md:items-center md:justify-between gap-12 md:gap-20">
 <div class="md:pr-6 lg:pr-10 max-w-[520px]">
 <h2 class="font-headline-lg text-headline-lg text-white uppercase mb-lg">WHY <span class="text-neon">MOTION FLICKS</span></h2>
-<ul class="space-y-md">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-y-md gap-x-lg">
 <li class="flex items-start gap-md group">
 <div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
-<h4 class="text-white font-bold uppercase">Proven Viral Frameworks</h4>
-<p class="text-zinc-500 text-sm">We don't guess. We follow battle-tested psychological structures that trigger the algorithm.</p>
+<h4 class="text-white font-bold uppercase">AI-Powered Content Operations</h4>
+<p class="text-zinc-500 text-sm">We build automated workflows that handle research, planning, creation, publishing, and optimization at scale.</p>
 </div>
 </li>
 <li class="flex items-start gap-md group">
@@ -978,8 +1455,8 @@
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
-<h4 class="text-white font-bold uppercase">High-Performance Production</h4>
-<p class="text-zinc-500 text-sm">Cinema-grade editing and sound design that keeps viewers glued to the screen.</p>
+<h4 class="text-white font-bold uppercase">Retention-First Content Engineering</h4>
+<p class="text-zinc-500 text-sm">Every piece of content is strategically structured for stronger watch time, engagement, audience retention, and conversion.</p>
 </div>
 </li>
 <li class="flex items-start gap-md group">
@@ -987,11 +1464,46 @@
 <span class="material-symbols-outlined text-sm" data-icon="check">check</span>
 </div>
 <div>
-<h4 class="text-white font-bold uppercase">Monetization-First Thinking</h4>
-<p class="text-zinc-500 text-sm">We don't just build views; we build revenue funnels for sustainable brand growth.</p>
+<h4 class="text-white font-bold uppercase">Multi-Platform Content Distribution</h4>
+<p class="text-zinc-500 text-sm">We transform one idea into platform-native content across YouTube, Instagram, TikTok, LinkedIn, X, and more.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">Data-Driven Growth Systems</h4>
+<p class="text-zinc-500 text-sm">Audience behavior, analytics, trend tracking, and performance insights guide every creative and marketing decision.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">Lead Generation & Revenue Scaling</h4>
+<p class="text-zinc-500 text-sm">Our workflows are designed to increase visibility, attract inbound opportunities, strengthen brand authority, and drive monetization.</p>
+</div>
+</li>
+<li class="flex items-start gap-md group">
+<div class="mt-1 bg-neon/10 p-1 border border-neon/30 text-neon">
+<span class="material-symbols-outlined text-sm" data-icon="check">check</span>
+</div>
+<div>
+<h4 class="text-white font-bold uppercase">Scalable AI Infrastructure</h4>
+<p class="text-zinc-500 text-sm">Built for startups, founders, creators, and modern businesses ready to automate operations and scale faster with AI-powered systems.</p>
 </div>
 </li>
 </ul>
+<div class="founder-profile fade-in-on-scroll">
+    <img src="images/100.png" alt="Founder Anand" class="founder-image" />
+    <div>
+        <div class="founder-name">ANAND</div>
+        <div class="founder-title">Founder &amp; CEO, Motion Flicks</div>
+        
+    </div>
+</div>
 </div>
 <div class="relative w-full flex items-center justify-center md:justify-end">
     <img 
@@ -1003,59 +1515,242 @@
 </div>
 </section>
 <!-- Testimonials -->
-<section id="client-transmission" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto">
-<h2 class="font-headline-lg text-headline-lg text-white text-center uppercase mb-xl">Client <span class="text-neon">Transmission</span></h2>
-<div class="testimonial-slider">
-<div class="testimonial-track">
-<!-- Testimonial 1 -->
-<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
-<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
-<p class="text-white font-body-lg italic relative z-10">"Motion Flicks took our dead channel and turned it into a $50k/month revenue machine in under a year. Their editing style is unmatched."</p>
-<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a successful male entrepreneur in a black minimalist suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjz6c9Nbw_tjZZe6WEOdJ5IYoPmHbCZUVPWJGaWL8dCy3uBgqbcb1keHrU0xM7dk3SUB8AMUHwxnIuyZFgsjp3zOwtkZ-UTyzmqCOKcLY2lFhRYIkXQXiz0-sL3GruLJ1vijFqRYtcxD0DJqJ2vOE6QRT7xAxaaZCe0iJeqsL9a6lu0DycmpeFdTTptEl2Qu9Q5FG_0Ys-NWtK7DHMGGz6ZXsZFW6_tQhwnEZQwug5YsM2W7eW-CWpZul04itXa1NDrgx8MavFcQl"/>
-<div>
-<div class="text-white font-bold font-label-sm">Marcus V.</div>
-<div class="text-neon text-xs font-label-sm">CEO, TECHSTACK</div>
+<section id="client-transmission" class="py-xl px-6 md:px-12 max-w-screen-2xl mx-auto" data-carousel="verified">
+<h2 class="font-headline-lg text-headline-lg text-white text-center uppercase mb-xl">VERIFIED <span class="text-neon">CLIENT RESULTS</span></h2>
+<div class="marquee">
+<div class="marquee-track" data-carousel-track>
+<!-- Proof Card 1 -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L1.jpeg" alt="Chris Gayle video call screenshot" class="proof-image" data-lightbox-src="images/L1.jpeg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R1.png" alt="Chris Gayle analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R1.png" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Chris Gayle</div>
+            <div class="proof-role">Owner of Athlete Zone Channel</div>
+            <div class="proof-business">Basketball Training School</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>12M+ Views</li>
+                <li>25.6K Subscribers</li>
+                <li>$396K Revenue Generated</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 2 -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L2.jpg" alt="Sam Buro video call screenshot" class="proof-image" data-lightbox-src="images/L2.jpg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R2.png" alt="Sam Buro analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R2.png" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Sam Buro</div>
+            <div class="proof-role">Owner of 1.2M+ Subscriber Channel</div>
+            <div class="proof-business">Orange Animation Studio</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>1.2M+ Subscribers</li>
+                <li>Multi-Million Views</li>
+                <li>Scaled Animation Business</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 3 -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L3.jpg" alt="Timi video call screenshot" class="proof-image" data-lightbox-src="images/L3.jpg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R3.jpg" alt="Timi analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R3.jpg" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Timi</div>
+            <div class="proof-role">Founder</div>
+            <div class="proof-business">Signature Stories</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>Audience Growth</li>
+                <li>Increased Reach</li>
+                <li>Content System Scaling</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 4 -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L4.png" alt="Toms Znatnajs video call screenshot" class="proof-image" data-lightbox-src="images/L4.png" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R4.jpg" alt="Toms Znatnajs analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R4.jpg" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Toms Znatnajs</div>
+            <div class="proof-role">Owner of 4 YouTube Automation Channels</div>
+            <div class="proof-business">Motion Flicks Client</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>$45K+/Month Revenue</li>
+                <li>Multiple Automated Channels</li>
+                <li>Long-Term Growth</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 1 Duplicate -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L1.jpeg" alt="Chris Gayle video call screenshot" class="proof-image" data-lightbox-src="images/L1.jpeg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R1.png" alt="Chris Gayle analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R1.png" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Chris Gayle</div>
+            <div class="proof-role">Owner of Athlete Zone Channel</div>
+            <div class="proof-business">Basketball Training School</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>12M+ Views</li>
+                <li>25.6K Subscribers</li>
+                <li>$396K Revenue Generated</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 2 Duplicate -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L2.jpg" alt="Sam Buro video call screenshot" class="proof-image" data-lightbox-src="images/L2.jpg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R2.png" alt="Sam Buro analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R2.png" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Sam Buro</div>
+            <div class="proof-role">Owner of 1.2M+ Subscriber Channel</div>
+            <div class="proof-business">Orange Animation Studio</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>1.2M+ Subscribers</li>
+                <li>Multi-Million Views</li>
+                <li>Scaled Animation Business</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 3 Duplicate -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L3.jpg" alt="Timi video call screenshot" class="proof-image" data-lightbox-src="images/L3.jpg" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R3.jpg" alt="Timi analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R3.jpg" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Timi</div>
+            <div class="proof-role">Founder</div>
+            <div class="proof-business">Signature Stories</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>Audience Growth</li>
+                <li>Increased Reach</li>
+                <li>Content System Scaling</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Proof Card 4 Duplicate -->
+<div class="testimonial-slide proof-slide">
+    <div class="proof-card">
+        <div class="proof-badge">Verified Client</div>
+        <div class="proof-media">
+            <div class="proof-media-item">
+                <img src="images/L4.png" alt="Toms Znatnajs video call screenshot" class="proof-image" data-lightbox-src="images/L4.png" />
+            </div>
+            <div class="proof-media-item">
+                <img src="images/R4.jpg" alt="Toms Znatnajs analytics screenshot" class="proof-image analytics-glow" data-lightbox-src="images/R4.jpg" />
+            </div>
+        </div>
+        <div class="proof-meta">
+            <div class="proof-name">Toms Znatnajs</div>
+            <div class="proof-role">Owner of 4 YouTube Automation Channels</div>
+            <div class="proof-business">Motion Flicks Client</div>
+        </div>
+        <div>
+            <div class="proof-results-title">Results</div>
+            <ul class="proof-results">
+                <li>$45K+/Month Revenue</li>
+                <li>Multiple Automated Channels</li>
+                <li>Long-Term Growth</li>
+            </ul>
+        </div>
+    </div>
 </div>
 </div>
 </div>
-<!-- Testimonial 2 -->
-<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
-<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
-<p class="text-white font-body-lg italic relative z-10">"The scale at which they operate is insane. We went from 500 views per video to 1M+ views consistently. Best investment we've made."</p>
-<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a confident female digital creator with sleek modern styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCot9B4R4H_6vlAi7ZRAnW2F0-pQ7nuOclabV1QweiP4EB22J6kdcP7jNPYvKfTBSZrQWZsPpVrcq8MYbDw0SkTPkay6AD8RRJRgrDC12WE7WvYAcshK5mkpgAryjRUhNKAAVQPj-BJwZ1M2aD408t0dHx4-0XruP3E97_5Bw436InT-eRrXanMB7KAkLt_pgtZCdTS222p8Ks66Y-XnzEy3wB6AZ_bHTXqDD_khNJFbm8t6JqiiZpQR__MIEsgch2SDTJPI3sk1gH1"/>
-<div>
-<div class="text-white font-bold font-label-sm">Sarah Jane</div>
-<div class="text-neon text-xs font-label-sm">FOUNDER, CREATIVEHUB</div>
+<div class="performance-arrows">
+    <button type="button" data-carousel-prev>
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <button type="button" data-carousel-next>
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
 </div>
-</div>
-</div>
-<!-- Testimonial 1 Duplicate -->
-<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
-<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
-<p class="text-white font-body-lg italic relative z-10">"Motion Flicks took our dead channel and turned it into a $50k/month revenue machine in under a year. Their editing style is unmatched."</p>
-<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a successful male entrepreneur in a black minimalist suit" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjz6c9Nbw_tjZZe6WEOdJ5IYoPmHbCZUVPWJGaWL8dCy3uBgqbcb1keHrU0xM7dk3SUB8AMUHwxnIuyZFgsjp3zOwtkZ-UTyzmqCOKcLY2lFhRYIkXQXiz0-sL3GruLJ1vijFqRYtcxD0DJqJ2vOE6QRT7xAxaaZCe0iJeqsL9a6lu0DycmpeFdTTptEl2Qu9Q5FG_0Ys-NWtK7DHMGGz6ZXsZFW6_tQhwnEZQwug5YsM2W7eW-CWpZul04itXa1NDrgx8MavFcQl"/>
-<div>
-<div class="text-white font-bold font-label-sm">Marcus V.</div>
-<div class="text-neon text-xs font-label-sm">CEO, TECHSTACK</div>
-</div>
-</div>
-</div>
-<!-- Testimonial 2 Duplicate -->
-<div class="testimonial-slide bg-surface-container p-lg border border-zinc-800 space-y-md relative">
-<span class="material-symbols-outlined text-neon/20 text-6xl absolute top-4 right-4" data-icon="format_quote">format_quote</span>
-<p class="text-white font-body-lg italic relative z-10">"The scale at which they operate is insane. We went from 500 views per video to 1M+ views consistently. Best investment we've made."</p>
-<div class="flex items-center gap-md pt-md border-t border-zinc-800/50">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a confident female digital creator with sleek modern styling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCot9B4R4H_6vlAi7ZRAnW2F0-pQ7nuOclabV1QweiP4EB22J6kdcP7jNPYvKfTBSZrQWZsPpVrcq8MYbDw0SkTPkay6AD8RRJRgrDC12WE7WvYAcshK5mkpgAryjRUhNKAAVQPj-BJwZ1M2aD408t0dHx4-0XruP3E97_5Bw436InT-eRrXanMB7KAkLt_pgtZCdTS222p8Ks66Y-XnzEy3wB6AZ_bHTXqDD_khNJFbm8t6JqiiZpQR__MIEsgch2SDTJPI3sk1gH1"/>
-<div>
-<div class="text-white font-bold font-label-sm">Sarah Jane</div>
-<div class="text-neon text-xs font-label-sm">FOUNDER, CREATIVEHUB</div>
-</div>
-</div>
-</div>
-</div>
+<div class="proof-lightbox" id="proofLightbox" aria-hidden="true">
+    <div class="proof-lightbox-content" role="dialog" aria-modal="true">
+        <button class="proof-lightbox-close" type="button" aria-label="Close image">✕</button>
+        <img class="proof-lightbox-image" src="" alt="Expanded client proof screenshot" />
+    </div>
 </div>
 </section>
 <!-- Final CTA Section -->
@@ -1163,89 +1858,137 @@
                 });
             });
         }
+
+        const fadeTargets = document.querySelectorAll('.fade-in-on-scroll');
+        if (fadeTargets.length > 0) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            fadeTargets.forEach(target => observer.observe(target));
+        }
+
+        const lightbox = document.getElementById('proofLightbox');
+        const lightboxImage = lightbox?.querySelector('.proof-lightbox-image');
+        const lightboxClose = lightbox?.querySelector('.proof-lightbox-close');
+        const lightboxTriggers = document.querySelectorAll('[data-lightbox-src]');
+
+        const closeLightbox = () => {
+            if (!lightbox || !lightboxImage) return;
+            lightbox.classList.remove('open');
+            lightbox.setAttribute('aria-hidden', 'true');
+            lightboxImage.src = '';
+        };
+
+        lightboxTriggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                if (!lightbox || !lightboxImage) return;
+                const src = trigger.getAttribute('data-lightbox-src');
+                if (!src) return;
+                lightboxImage.src = src;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        lightboxClose?.addEventListener('click', closeLightbox);
+        lightbox?.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeLightbox();
+            }
+        });
     });
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const section = document.querySelector(".performance-section");
-    if (!section) {
-        return;
-    }
+    const sections = document.querySelectorAll("[data-carousel]");
+    sections.forEach((section) => {
+        const track = section.querySelector("[data-carousel-track]");
+        const prevBtn = section.querySelector("[data-carousel-prev]");
+        const nextBtn = section.querySelector("[data-carousel-next]");
+        const cards = track ? Array.from(track.children) : [];
 
-    const track = section.querySelector(".marquee-track");
-    const prevBtn = section.querySelector("#prevBtn");
-    const nextBtn = section.querySelector("#nextBtn");
-    const cards = Array.from(track.children);
-
-    if (!track || cards.length === 0) {
-        return;
-    }
-
-    let offset = 0;
-    let targetOffset = 0;
-    let lastTime = performance.now();
-    const speed = 0.06;
-    const halfCount = Math.floor(cards.length / 2);
-
-    const getGap = () => {
-        const styles = window.getComputedStyle(track);
-        const gapValue = parseFloat(styles.columnGap || styles.gap || "0");
-        return Number.isNaN(gapValue) ? 0 : gapValue;
-    };
-
-    const getCardWidth = () => {
-        const card = cards[0];
-        return card ? card.getBoundingClientRect().width : 0;
-    };
-
-    const getLoopWidth = () => {
-        const cardWidth = getCardWidth();
-        const gap = getGap();
-        return halfCount > 0 ? (cardWidth + gap) * halfCount : 0;
-    };
-
-    const normalizeOffsets = (loopWidth) => {
-        if (loopWidth <= 0) {
+        if (!track || cards.length === 0) {
             return;
         }
-        const threshold = loopWidth * 1000;
-        if (targetOffset > threshold || targetOffset < -threshold) {
-            targetOffset = targetOffset % loopWidth;
-            offset = offset % loopWidth;
-        }
-    };
 
-    const animate = (time) => {
-        const loopWidth = getLoopWidth();
-        const delta = time - lastTime;
-        lastTime = time;
+        let offset = 0;
+        let targetOffset = 0;
+        let lastTime = performance.now();
+        const speed = 0.06;
+        const halfCount = Math.floor(cards.length / 2);
 
-        targetOffset += delta * speed;
-        normalizeOffsets(loopWidth);
+        const getGap = () => {
+            const styles = window.getComputedStyle(track);
+            const gapValue = parseFloat(styles.columnGap || styles.gap || "0");
+            return Number.isNaN(gapValue) ? 0 : gapValue;
+        };
 
-        const ease = 0.12;
-        offset += (targetOffset - offset) * ease;
+        const getCardWidth = () => {
+            const card = cards[0];
+            return card ? card.getBoundingClientRect().width : 0;
+        };
 
-        const translateX = loopWidth > 0 ? -(offset % loopWidth) : 0;
-        track.style.transform = `translateX(${translateX}px)`;
+        const getLoopWidth = () => {
+            const cardWidth = getCardWidth();
+            const gap = getGap();
+            return halfCount > 0 ? (cardWidth + gap) * halfCount : 0;
+        };
+
+        const normalizeOffsets = (loopWidth) => {
+            if (loopWidth <= 0) {
+                return;
+            }
+            const threshold = loopWidth * 1000;
+            if (targetOffset > threshold || targetOffset < -threshold) {
+                targetOffset = targetOffset % loopWidth;
+                offset = offset % loopWidth;
+            }
+        };
+
+        const animate = (time) => {
+            const loopWidth = getLoopWidth();
+            const delta = time - lastTime;
+            lastTime = time;
+
+            targetOffset += delta * speed;
+            normalizeOffsets(loopWidth);
+
+            const ease = 0.12;
+            offset += (targetOffset - offset) * ease;
+
+            const translateX = loopWidth > 0 ? -(offset % loopWidth) : 0;
+            track.style.transform = `translateX(${translateX}px)`;
+            requestAnimationFrame(animate);
+        };
+
+        const nudgeBy = (direction) => {
+            const cardWidth = getCardWidth();
+            const gap = getGap();
+            const step = cardWidth + gap;
+            targetOffset += step * direction;
+        };
+
+        prevBtn?.addEventListener("click", () => nudgeBy(-1));
+        nextBtn?.addEventListener("click", () => nudgeBy(1));
+
+        window.addEventListener("resize", () => {
+            lastTime = performance.now();
+        });
+
         requestAnimationFrame(animate);
-    };
-
-    const nudgeBy = (direction) => {
-        const cardWidth = getCardWidth();
-        const gap = getGap();
-        const step = cardWidth + gap;
-        targetOffset += step * direction;
-    };
-
-    prevBtn?.addEventListener("click", () => nudgeBy(-1));
-    nextBtn?.addEventListener("click", () => nudgeBy(1));
-
-    window.addEventListener("resize", () => {
-        lastTime = performance.now();
     });
-
-    requestAnimationFrame(animate);
 });
 </script>
 </body></html>
